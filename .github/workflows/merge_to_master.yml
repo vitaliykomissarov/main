@@ -1,0 +1,25 @@
+
+name: release_to_master
+
+on:
+  workflow_dispatch:
+    inputs:
+      target-branch:
+        description: 'Target branch'
+        required: true
+        default: 'master'
+
+env:
+  CI: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ActionwareIO/branch-push-action@action
+        with:
+          branch: action
+          files: |
+            ./templates/front-app/
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
