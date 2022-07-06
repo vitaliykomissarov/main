@@ -7,7 +7,7 @@ on:
       target-branch:
         description: 'Target branch'
         required: true
-        default: 'master'
+        default: 'main'
 
 env:
   CI: false
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: ActionwareIO/branch-push-action@action
         with:
-          branch: action
+          branch: ${{github.event.inputs.target-branch}}
           files: |
             ./templates/front-app/
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
